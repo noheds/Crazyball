@@ -1235,7 +1235,7 @@ Prefab:
     - target: {fileID: 114608241985991494, guid: 47576738487dc4fa8b8a31906930f772,
         type: 2}
       propertyPath: maxSecondsBetweenSpawning
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47576738487dc4fa8b8a31906930f772, type: 2}
@@ -1504,7 +1504,7 @@ Prefab:
     - target: {fileID: 114608241985991494, guid: 47576738487dc4fa8b8a31906930f772,
         type: 2}
       propertyPath: maxSecondsBetweenSpawning
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47576738487dc4fa8b8a31906930f772, type: 2}

@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class Damage : MonoBehaviour {
-	
+
 	public float damageAmount = 10.0f;
-	
+
 	public bool damageOnTrigger = true;
 	public bool damageOnCollision = false;
 	public bool continuousDamage = false;
@@ -16,20 +16,21 @@ public class Damage : MonoBehaviour {
 
 	private float savedTime = 0;
 
-	void OnTriggerEnter(Collider collision)						// Para balas en trigger
+	void OnTriggerEnter(Collider collision)						// used for things like bullets, which are triggers.  
 	{
+		Debug.Log ("on trigger enter damage");
 		if (damageOnTrigger && collision.gameObject.tag!= "Environment") {
 			Debug.Log ("On trigger Enter");
-			if (this.tag == "PlayerBullet" && collision.gameObject.tag == "Player")	// Si el jugador se disparó con sus balas lo ignora
+			if (this.tag == "PlayerBullet" && collision.gameObject.tag == "Player")	// if the player got hit with it's own bullets, ignore it
 				return;
-		
-			if (collision.gameObject.GetComponent<Health> () != null) {	//Si el objeto tiene el Cmponente de Health, resta el daño
+
+			if (collision.gameObject.GetComponent<Health> () != null) {	// if the hit object has the Health script on it, deal damage
 				collision.gameObject.GetComponent<Health> ().ApplyDamage (damageAmount);
-		
+
 				if (destroySelfOnImpact) {
-					Destroy (gameObject, delayBeforeDestroy);	  // Destruye el objeto 
+					Destroy (gameObject, delayBeforeDestroy);	  // destroy the object whenever it hits something
 				}
-			
+
 				if (explosionPrefab != null) {
 					Instantiate (explosionPrefab, transform.position, transform.rotation);
 				}
@@ -38,20 +39,23 @@ public class Damage : MonoBehaviour {
 	}
 
 
-	void OnCollisionEnter(Collision collision) 						// para cosas que se destruyen en el impacto y no son triggers
+	void OnCollisionEnter(Collision collision) 						// this is used for things that explode on impact and are NOT triggers
 	{	
-		
+
+		Debug.Log ("on collision enter damage");
+
 		if (damageOnCollision && collision.gameObject.tag!= "Environment") {
 			Debug.Log ("On Collision Enter");
-			if (this.tag == "PlayerBullet" && collision.gameObject.tag == "Player")	
-		
-			if (collision.gameObject.GetComponent<Health> () != null) {	// 
+			if (this.tag == "PlayerBullet" && collision.gameObject.tag == "Player")	// if the player got hit with it's own bullets, ignore it
+				return;
+
+			if (collision.gameObject.GetComponent<Health> () != null) {	// if the hit object has the Health script on it, deal damage
 				collision.gameObject.GetComponent<Health> ().ApplyDamage (damageAmount);
-			
+
 				if (destroySelfOnImpact) {
-					Destroy (gameObject, delayBeforeDestroy);	  
+					Destroy (gameObject, delayBeforeDestroy);	  // destroy the object whenever it hits something
 				}
-			
+
 				if (explosionPrefab != null) {
 					Instantiate (explosionPrefab, transform.position, transform.rotation);
 				}
@@ -60,11 +64,11 @@ public class Damage : MonoBehaviour {
 	}
 
 
-	void OnCollisionStay(Collision collision) // para daños que progresan sobre el tiempo
+	void OnCollisionStay(Collision collision) // this is used for damage over time things
 	{
 		if (continuousDamage) {
 			if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<Health> () != null) {
-				Debug.Log ("On trigger Stay");	// Cuando colisiona con el jugador
+				Debug.Log ("On trigger Stay");	// is only triggered if whatever it hits is the player
 				if (Time.time - savedTime >= continuousTimeBetweenHits) {
 					savedTime = Time.time;
 					collision.gameObject.GetComponent<Health> ().ApplyDamage (damageAmount);
@@ -72,5 +76,5 @@ public class Damage : MonoBehaviour {
 			}
 		}
 	}
-	
+
 }

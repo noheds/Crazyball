@@ -144,7 +144,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1096619055326490, guid: d53c26d3914294bc2bc601a4341dd539,
     type: 2}
   onLivesGone: 1
-  LevelToLoad: RollerMadness
+  LevelToLoad: Level1
 --- !u!114 &114718825103775838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  damageOnTrigger: 0
+  damageOnTrigger: 1
   damageOnCollision: 1
   continuousDamage: 0
   continuousTimeBetweenHits: 0

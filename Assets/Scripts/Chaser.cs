@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//[RequireComponent(typeof(CharacterController))]
+
 
 public class Chaser : MonoBehaviour {
 	
@@ -12,7 +12,7 @@ public class Chaser : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		// if no target specified, assume the player
+		
 		if (target == null) {
 
 			if (GameObject.FindWithTag ("Player")!=null)
@@ -31,15 +31,15 @@ public class Chaser : MonoBehaviour {
 		// face the target
 		transform.LookAt(target);
 
-		//get the distance between the chaser and the target
+		//distance between the chaser and the target
 		float distance = Vector3.Distance(transform.position,target.position);
 
-		//so long as the chaser is farther away than the minimum distance, move towards it at rate speed.
+		// the chaser is farther away than the minimum distance move towards it at rate speed.
 		if(distance > minDist)	
 			transform.position += transform.forward * speed * Time.deltaTime;	
 	}
 
-	// Set the target of the chaser
+
 	public void SetTarget(Transform newTarget)
 	{
 		target = newTarget;

@@ -6,7 +6,7 @@ public class Treasure : MonoBehaviour {
 	public int value = 10;
 	public GameObject explosionPrefab;
 
-	void OnTriggerEnter (Collider other)
+	void OnCollisionEnter (Collision other)
 	{
 		if (other.gameObject.tag == "Player") {
 			if (GameManager.gm!=null)
